@@ -2,21 +2,46 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MindAR Example</title>
-    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/dist/mindar-image.prod.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>AR Bridge Project</title>
+    
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    
+    <style>
+      body { margin: 0; overflow: hidden; background-color: #000; }
+      
+      /* 2. 카메라 영상(video)이 검은 레이어 뒤로 숨지 않도록 강제 노출 */
+      video {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        object-fit: cover !important;
+        z-index: -1 !important;
+      }
+      
+      /* AR 스캔 UI 오버레이 설정 */
+      .mindar-ui-overlay { z-index: 100; }
+    </style>
   </head>
 
   <body>
-    <a-scene mindar-image="imageTargetSrc: ./targets.mind; autoStart: true; uiLoading: yes; uiError: yes; uiScanning: yes;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    <a-scene 
+      mindar-image="imageTargetSrc: ./targets.mind; autoStart: true; uiLoading: yes; uiError: yes; uiScanning: yes;" 
+      vr-mode-ui="enabled: false" 
+      device-orientation-permission-ui="enabled: false"
+      loading-screen="enabled: false"
+      color-space="sRGB" 
+      renderer="colorManagement: true, physicallyCorrectLights">
+      
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
       <a-entity mindar-image-target="targetIndex: 0">
-        <a-plane color="blue" opacity="0.5" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+        <a-plane color="blue" opacity="0.6" position="0 0 0" height="0.8" width="1.2" rotation="0 0 0"></a-plane>
       </a-entity>
     </a-scene>
   </body>
 </html>
-
-
